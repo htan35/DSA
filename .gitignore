@@ -1,0 +1,5 @@
+# Ignore all executable files
+*.exe
+
+# Optional: Ignore VS Code environment settings if you don't want them on GitHub
+.vscode/
