@@ -38,7 +38,7 @@ void print(Node* head) {
     cout << "\n";
 }
 
-// Function to remove the tail node
+// Function to remove the kth node
 Node* removeskthElement(Node* head, int k) {
     if (head == NULL) return NULL; // Base case: list is empty
 
