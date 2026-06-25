@@ -5,6 +5,14 @@
 // LeetCode: Quick Sort (Standard Sorting Algorithm)
 // Time Complexity: O(n log n) average, O(n^2) worst case
 // Space Complexity: O(log n) auxiliary stack space
+
+
+//IMPORTANT: if you want any other element as pivot, change these 2 lines in partition function
+// int pivot = arr[x]; // Choosing the x element
+// swap(arr[x], arr[j]);
+
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
