@@ -7,7 +7,7 @@ using namespace std;
 
 void insertion_sort(int a[], int n) {
     // Outer loop: pick elements from index 0 to n-1
-    for (int i = 0; i <= n - 1; i++) {
+    for (int i = 0; i < n; i++) {
         int j = i; // Start from the picked element index
 
         // Inner loop: shift elements back into their correct sorted position
