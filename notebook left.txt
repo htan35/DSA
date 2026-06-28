@@ -1,0 +1,7 @@
+notebook left:
+
+linkedlist
+- merging 2 LL
+- detect loop (slow fast)
+- middle element (slow fast)
+- nth from back (slow fast)
