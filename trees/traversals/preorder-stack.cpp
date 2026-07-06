@@ -1,7 +1,7 @@
 // LeetCode 144: Binary Tree Preorder Traversal (Iterative)
 // Time Complexity: O(N) -> Where N is the total number of nodes in the binary tree
 // Space Complexity: O(N) -> In the worst-case scenario (e.g., a skewed tree), the stack can hold up to N nodes
-//push root, pop root, print value, push right child, push left child, repeat until stack is empty
+// push root, pop root, print value, push right child, push left child, repeat until stack is empty
 #include <iostream>
 #include <vector>
 #include <stack>
@@ -25,8 +25,8 @@ public:
         vector<int> preorder;
         if(root == NULL) return preorder; // Base condition: if tree is empty, return empty vector
 
-        stack<TreeNode*> st; // Stack tracking nodes iteratively
-        st.push(root); // Initialize by pushing the root node
+        stack<TreeNode*> st;
+        st.push(root); 
 
         while(!st.empty()){
             root = st.top(); 
