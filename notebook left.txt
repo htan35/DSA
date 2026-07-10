@@ -5,3 +5,10 @@ linkedlist
 - detect loop (slow fast)
 - middle element (slow fast)
 - nth from back (slow fast)
+
+
+
+trees
+
+- diameter
+- max path sum

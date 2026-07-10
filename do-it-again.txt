@@ -2,3 +2,5 @@ trees:
 
 - Right/Left View of BT
 - level order
+- diameter
+- max path sum
