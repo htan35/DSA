@@ -18,6 +18,9 @@ public:
     // Function to find the shortest distance of all the vertices from the source vertex S.
     vector<int> dijkstra(int V, vector<vector<int>> adj[], int S) {
         // Min-heap tracking: pair<current_accumulated_distance, node_index>
+        // Syntax: priority_queue<value_type, container_type, comparator>
+        // Here: value_type = pair<int,int>, container_type = vector<pair<int,int>>,
+        // comparator = greater<pair<int,int>> to make it a min-heap (smallest distance on top).
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         
         // Initialize distance array to infinity (1e9)
