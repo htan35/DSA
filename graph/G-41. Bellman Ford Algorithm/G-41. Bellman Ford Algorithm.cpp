@@ -31,6 +31,12 @@ public:
                 int wt = it[2];
 
                 // Relax edge
+                // We first check dist[u] != 1e8 to ensure the source vertex u
+                // has a known (finite) distance; if u is still "infinity"
+                // it means u is not reachable from the source S and we must
+                // not use it to relax v. This also avoids adding wt to a
+                // sentinel INF value which could overflow or produce
+                // incorrect comparisons.
                 if (dist[u] != 1e8 && dist[u] + wt < dist[v]) {
                     dist[v] = dist[u] + wt;
                 }
