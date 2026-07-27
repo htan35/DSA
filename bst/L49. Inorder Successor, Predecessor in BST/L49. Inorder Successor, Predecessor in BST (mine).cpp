@@ -57,6 +57,9 @@ public:
         while (pre < ino.size() && key > ino[pre]->data)
             pre++;
 
+        // Test case inorder sequence: 1, 3, 4, 8, 9, 10 (key = 1)
+        // if condition : `pre` stops at index of 1, so predecessor is element just before it => NULL.
+        // else condition: key = 8, `pre` stops at index of 8, so predecessor is element just after it => 4.
         if (pre == 0)
             presuc.push_back(NULL);
         else
@@ -67,6 +70,9 @@ public:
         while (suc >= 0 && key < ino[suc]->data)
             suc--;
 
+        // Test case inorder sequence: 1, 3, 4, 8, 9, 10 (key = 10)
+        // if condition : `suc` stops at index of 10, so successor is element just after it => NULL.
+        //  else condition: key = 8, `suc` stops at index of 8, so successor is element just after it => 9.
         if (suc == ino.size() - 1)
             presuc.push_back(NULL);
         else
