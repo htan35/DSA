@@ -59,7 +59,7 @@ public:
 
         // Test case inorder sequence: 1, 3, 4, 8, 9, 10 (key = 1)
         // if condition : `pre` stops at index of 1, so predecessor is element just before it => NULL.
-        // else condition: key = 8, `pre` stops at index of 8, so predecessor is element just after it => 4.
+        // else condition : key = 8, `pre` stops at index of 8, so predecessor is element just after it => 4.
         if (pre == 0)
             presuc.push_back(NULL);
         else
