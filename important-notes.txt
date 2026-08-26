@@ -1,0 +1,4 @@
+## binary search
+- if low is on possible case and high is at NON possible case then return high
+- if low is on NON possible case and high is at possible case then return low
+this reduces having extra variable as mid (https://youtu.be/R_Mfw4ew-Vo?si=JeqqaGj-kBrhF901&t=1324)
