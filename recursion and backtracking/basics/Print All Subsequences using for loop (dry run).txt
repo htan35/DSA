@@ -1,0 +1,52 @@
+subset(start = 0)
+│
+├── i = 0 → Take 1
+│   ds = [1]
+│   │
+│   └── subset(start = 1)
+│       │
+│       ├── i = 1 → Take 2
+│       │   ds = [1,2]
+│       │   │
+│       │   └── subset(start = 2)
+│       │       │
+│       │       └── i = 2 → Take 3
+│       │           ds = [1,2,3]
+│       │           │
+│       │           └── subset(start = 3)
+│       │               → loop stops
+│       │
+│       │       Undo 3
+│       │
+│       └── Undo 2
+│       │
+│       └── i = 2 → Take 3
+│           ds = [1,3]
+│           │
+│           └── subset(start = 3)
+│               → loop stops
+│
+│   Undo 1
+│
+├── i = 1 → Take 2
+│   ds = [2]
+│   │
+│   └── subset(start = 2)
+│       │
+│       └── i = 2 → Take 3
+│           ds = [2,3]
+│           │
+│           └── subset(start = 3)
+│               → loop stops
+│
+│       Undo 3
+│
+│   Undo 2
+│
+└── i = 2 → Take 3
+    ds = [3]
+    │
+    └── subset(start = 3)
+        → loop stops
+
+    Undo 3
