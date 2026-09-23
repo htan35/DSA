@@ -6,8 +6,8 @@
  * Approach Explanation:
  * 1. Observation from Tabulation:
  *    - To calculate the state `dp[i]`, we only ever need the values of the immediate 
- *      two preceding states: `dp[i - 1]` and `dp[i - 2]`[cite: 21, 22].
- *    - An entire array of size N is therefore unnecessary[cite: 21, 22].
+ *      two preceding states: `dp[i - 1]` and `dp[i - 2]`.
+ *    - An entire array of size N is therefore unnecessary.
  * 2. State Maintenance with Two Variables:
  *    - `prev`: Represents the minimum energy required to reach index `i - 1` .
  *    - `prev2`: Represents the minimum energy required to reach index `i - 2` .
