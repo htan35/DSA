@@ -19,8 +19,11 @@
  *        - `prev2`: answer for index `i - 2`
  *    - We can reduce auxiliary space from O(N) to O(1) using two variables.
  * 
- * Time Complexity:  O(N) - Linear iteration across all elements.
- * Space Complexity: O(1) - Constant auxiliary space (for optimized iterative version).
+ * Time & Space Complexity Summary:
+ * - 1. Recursive:        TC: O(2^N) | SC: O(N) auxiliary stack
+ * - 2. Memoization:      TC: O(N)   | SC: O(N) DP table + O(N) stack
+ * - 3. Tabulation:       TC: O(N)   | SC: O(N) DP table
+ * - 4. Space-Optimized:  TC: O(N)   | SC: O(1) constant auxiliary space
  */
 
 #include <iostream>
@@ -31,29 +34,81 @@ using namespace std;
 
 class Solution {
 public:
-    // ------------------------------------------------------------------
-    // 1. Top-Down Approach (Memoization)
+    // -------------------------------------------------------------
+    // 1. Recursive Approach (Brute Force)
+    // Time Complexity:  O(2^N)
+    // Space Complexity: O(N) recursion stack
+    // -------------------------------------------------------------
+    int solveRecursive(int ind, const vector<int>& nums) {
+        if (ind == 0) return nums[0];
+        if (ind < 0) return 0;
+
+        int pick = nums[ind] + solveRecursive(ind - 2, nums);
+        int notPick = 0 + solveRecursive(ind - 1, nums);
+
+        return max(pick, notPick);
+    }
+
+    int robRecursive(const vector<int>& nums) {
+        int n = nums.size();
+        if (n == 0) return 0;
+        return solveRecursive(n - 1, nums);
+    }
+
+    // -------------------------------------------------------------
+    // 2. Memoization Approach (Top-Down DP)
     // Time Complexity:  O(N)
-    // Space Complexity: O(N)
-    // ------------------------------------------------------------------
-    int f(int ind, vector<int>& nums, vector<int>& dp) {
-        if (ind == 0) return nums[ind];
+    // Space Complexity: O(N) dp array + O(N) recursion stack
+    // -------------------------------------------------------------
+    int solveMemo(int ind, const vector<int>& nums, vector<int>& dp) {
+        if (ind == 0) return nums[0];
         if (ind < 0) return 0;
 
         if (dp[ind] != -1) return dp[ind];
 
-        int pick = nums[ind] + f(ind - 2, nums, dp);
-        int notPick = 0 + f(ind - 1, nums, dp);
+        int pick = nums[ind] + solveMemo(ind - 2, nums, dp);
+        int notPick = 0 + solveMemo(ind - 1, nums, dp);
 
         return dp[ind] = max(pick, notPick);
     }
 
-    // ------------------------------------------------------------------
-    // 2. Space-Optimized Tabulation (Most Optimal)
+    int robMemo(const vector<int>& nums) {
+        int n = nums.size();
+        if (n == 0) return 0;
+        vector<int> dp(n, -1);
+        return solveMemo(n - 1, nums, dp);
+    }
+
+    // -------------------------------------------------------------
+    // 3. Tabulation Approach (Bottom-Up DP)
+    // Time Complexity:  O(N)
+    // Space Complexity: O(N) dp table
+    // -------------------------------------------------------------
+    int robTabulation(const vector<int>& nums) {
+        int n = nums.size();
+        if (n == 0) return 0;
+
+        vector<int> dp(n, 0);
+        dp[0] = nums[0];
+
+        for (int i = 1; i < n; i++) {
+            int pick = nums[i];
+            if (i > 1) pick += dp[i - 2];
+
+            int notPick = 0 + dp[i - 1];
+
+            dp[i] = max(pick, notPick);
+        }
+
+        return dp[n - 1];
+    }
+
+    // -------------------------------------------------------------
+    // 4. Space-Optimized Approach (Most Optimal)
     // Time Complexity:  O(N)
     // Space Complexity: O(1)
-    // ------------------------------------------------------------------
-    int maximumNonAdjacentSum(vector<int>& nums) {
+    // -------------------------------------------------------------
+    int robSpaceOptimized(const vector<int>& nums) {
         int n = nums.size();
         if (n == 0) return 0;
 
@@ -81,26 +136,19 @@ int main() {
         Example:
         nums = [2, 1, 4, 9]
 
-        Possible non-adjacent subsets:
+        Subsets without adjacent indices:
         - [2, 4] -> sum = 6
         - [2, 9] -> sum = 11 (Optimal)
         - [1, 9] -> sum = 10
-        - [4], [9], etc.
-
-        Expected Output: 11
     */
 
     vector<int> nums = {2, 1, 4, 9};
-    int n = nums.size();
 
     Solution solver;
-
-    // Memoization test
-    vector<int> dp(n, -1);
-    cout << "Maximum Sum (Memoization):     " << solver.f(n - 1, nums, dp) << "\n";
-
-    // Space-optimized test
-    cout << "Maximum Sum (Space-Optimized): " << solver.maximumNonAdjacentSum(nums) << "\n";
+    cout << "1. Recursive:        " << solver.robRecursive(nums) << "\n";
+    cout << "2. Memoization:      " << solver.robMemo(nums) << "\n";
+    cout << "3. Tabulation:       " << solver.robTabulation(nums) << "\n";
+    cout << "4. Space-Optimized:  " << solver.robSpaceOptimized(nums) << "\n";
 
     return 0;
 }
